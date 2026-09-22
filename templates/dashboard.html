@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welome to dashboard</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 40vw;
+            height: 30vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .box h3{
+            position: relative;
+            top: 40px;
+            right: 300px;
+        }
+        body {
+            background-image: url("{{url_for('static', filename='bg2.webp')}}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            color: white;
+            display: flex;
+            justify-content: center;
+        }
+        button{
+            margin-top: 50px;
+            width: 100%;
+            background-color: #ffffff;
+            color: #080710;
+            padding: 15px 15px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+    <h1>Welcome to dashboard</h1> <br>
+    <h3>
+    <p>Hello, {{username}}!</p>
+    </h3>
+    <form action="{{ url_for('logout') }}" method="POST">
+        <button type="submit">Log out</button>
+    </form>
+    </div>
+</body>
+</html>
