@@ -1,8 +1,11 @@
 from flask import Flask, request, render_template, redirect, url_for, session, Response, flash
+from werkzeug.security import check_password_hash
+from dotenv import load_dotenv
 import UserData
-UserData.create_table()  # Create the table if it doesn't exist
+import os
+
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # Change this to a random secret key
+
 
 @app.route('/' , methods = ['GET' , 'POST'])
 def login():
@@ -11,7 +14,7 @@ def login():
         password = request.form['password']
         user_data = UserData.find_user(user)
         if user_data:
-            if user_data[1] == user and user_data[2] == password:
+            if user_data[1] == user and check_password_hash(user_data[2], password):
                 session['user'] = user
                 return redirect(url_for("dashboard"))
             else:

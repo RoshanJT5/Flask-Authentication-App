@@ -1,4 +1,5 @@
 import sqlite3
+from werkzeug.security import generate_password_hash, check_password_hash
 
 def get_connection():
     conn = sqlite3.connect('Database.db')
@@ -21,15 +22,16 @@ def create_table():
 
 
 
-#Function to add email,password
+#Function to add Username and Password
 def add_data(username, password):
     conn = get_connection()
+    hash_password = generate_password_hash(password)
     cursor = conn.cursor()
     cursor.execute(
         '''
         INSERT INTO USERS (username, password)
         VALUES(?,?)
-        ''', (username, password) 
+        ''', (username, hash_password) 
     )
     conn.commit()
     conn.close()
